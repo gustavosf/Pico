@@ -52,5 +52,3 @@
 #define CONST       2202
 #define INT_LIT     2203
 #define F_LIT       2204
-
-#define COMMENT     3000
