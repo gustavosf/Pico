@@ -1,0 +1,15 @@
+*.o
+*.slo
+*.lo
+*.so
+*.a
+*.la
+
+*.log
+*.swṕ
+
+assets/
+src/html
+src/latex
+src/lex.yy.c
+src/pico

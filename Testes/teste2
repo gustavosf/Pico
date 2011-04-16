@@ -1,0 +1,33 @@
+*
++
+-
+/
+,
+;
+:
+,
+"
+(
+)
+[
+]
+{
+}
+<
+>
+:=
+<=
+>=
+=
+!=
+&&
+||
+!
+
+/* reconhecemos alguns caracteres agrupados */
+
+<<=||&&++/-=<=:=
+
+/* Testes abaixo não devem ser reconhecidos pois não estão listados :) */
+
+½»¬®»¹°$#@%&¨
