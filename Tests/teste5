@@ -1,0 +1,7 @@
+int teste = 0
+while (teste < 10) {
+  teste := teste + 1
+}
+repeat {
+  teste := teste - 1
+} until (teste == 0)
