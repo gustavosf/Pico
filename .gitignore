@@ -8,6 +8,9 @@
 *.log
 *.swṕ
 
+*.tar
+*.tar.gz
+
 assets/
 src/html
 src/latex

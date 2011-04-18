@@ -5,13 +5,15 @@
     #include <stdlib.h>
     #include <string.h>
    
-    /* este include eh importante... */
     #include "tokens.h"
+
+	int    VAL_INT;
+	double VAL_DOUBLE;
   
 %}
 %x IN_COMMENT 
 
- /* Definicoes regulares (A COMPLETAR conforme a especificacao) */
+ /* Definicoes regulares */
 
 digito    [0-9]
 maiuscula [A-Z]
@@ -77,22 +79,22 @@ false  { return(FALSE); }
  /* reconhecimento de caracteres 'brancos'
   * - carriage return, line feed e tabs
   */
-[ \r\n\t]+ { printf("\tBRANCO\n"); }
+[ \r\n\t]+ { printf("SPACE\n"); }
 
  /* lexemas complexos */
-({minuscula}|_)({letra}|{digito}|_|#)*    { return(IDF); }
-{maiuscula}({maiuscula}|{digito}|_)*      { return(CONST); }
-{digito}+                                 { return(INT_LIT); }
-{digito}+\.{digito}+([eE][+-]?{digito}+)? { return(F_LIT); }
+({minuscula}|_)({letra}|{digito}|_|#)*    { printf("%s\n", yytext);    return(IDF); }
+{maiuscula}({maiuscula}|{digito}|_)*      { printf("%s\n", yytext);    return(CONST); }
+{digito}+                                 { VAL_INT = atoi(yytext);    return(INT_LIT); }
+{digito}+\.{digito}+([eE][+-]?{digito}+)? { VAL_DOUBLE = atof(yytext); return(F_LIT); }
 
  /* reconhecimento de comentarios
   * http://flex.sourceforge.net/manual/How-can-I-match-C_002dstyle-comments_003f.html
   */
 <INITIAL>{
-  "/*"              BEGIN(IN_COMMENT); printf("#COMM#\t%s", yytext);
+  "/*"      BEGIN(IN_COMMENT); printf("#COMM#");
 }
 <IN_COMMENT>{
-  "*/"      BEGIN(INITIAL); printf("%s\n", yytext);
+  "*/"      BEGIN(INITIAL); printf("\n");
   [^*\n]+   printf("%s", yytext); // eat comment in chunks
   "*"       // eat the lone star
   \n        yylineno++; 
@@ -101,7 +103,7 @@ false  { return(FALSE); }
  /* Tratamento dos erros lexicais: a regra seguinte pega tudo o que nao
   * fechou com uma Regexp anterior.
   */
-. { printf("#ERRO#\t%c\t%s\n", yytext[0], yytext); exit(-1); }
+. { printf("Erro lexical - caractere nao reconhecido: %c.\n", yytext[0]); exit(-1); }
 
 %%
 
@@ -109,28 +111,26 @@ false  { return(FALSE); }
 
 extern FILE *yyin;
 int main(int argc, char* argv[]) {
-  int token;
-  if (argc != 2) {
-    printf("uso: %s <input_file>. Try again!\n", argv[0]);
-    exit(-1);
-  }
-
-  /* leitura de arquivo como entrada padrão */
-  yyin = fopen(argv[1], "r");
-  if (!yyin) {
-    printf("Uso: %s <input_file>. Could not find %s. Try again!\n", argv[0], argv[1]);
-    exit(-1);
-  }
-
-  printf("ID\tValue\n");
-  printf("-----------------------------------------\n");
-  while (token=yylex()) { 
-    /* neste laco, obtem-se "palavra por palavra" os tokens reconhecidos
-     * pelo scanner fornecido pelo Lex. Poderia ser feita a analise
-     * sintatica... Sera feito depois!
-     */
-    printf("%d\t%s\n", token, yytext);
-  }
-  return(0);
+	int token;
+	if (argc != 2) {
+		printf("uso: %s <input_file>. Try again!\n", argv[0]);
+		exit(-1);
+	}
+	yyin = fopen(argv[1], "r");
+	if (!yyin) {
+		printf("Uso: %s <input_file>. Could not find %s. Try again!\n", argv[0], argv[1]);
+		exit(-1);
+	}
+	/* agora a entrada padrao eh o arquivo especificado como 1o argumento ao
+	 * executavel (argv[1]).
+	 * Soh chama o analisador lexical default fornecido pelo output do Flex:
+	 */
+	while (token=yylex()) { 
+		/* neste laco, obtem-se "palavra por palavra" os tokens reconhecidos
+		 * pelo scanner fornecido pelo Lex. Poderia ser feita a analise
+		 * sintatica... Sera feito depois!
+		 */
+		printf("Meu analisador lexical reconheceu o token %d\n", token);
+	}
+	return(0);
 }
-
