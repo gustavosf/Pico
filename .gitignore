@@ -12,6 +12,7 @@
 *.tar.gz
 
 assets/
+build/
 src/html
 src/latex
 src/lex.yy.c
