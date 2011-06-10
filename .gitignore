@@ -7,11 +7,14 @@
 
 *.log
 *.swṕ
+*.swo
 
 *.tar
 *.tar.gz
+*.tgz
 
 assets/
+build/
 src/html
 src/latex
 src/lex.yy.c
