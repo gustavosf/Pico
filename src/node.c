@@ -151,4 +151,39 @@ int pack_nodes(Node*** array_of_nodes, const int cur_size, Node* n) {
     return cur_size+1;
 }
 
+void printTree_rec(Node* n, int lvl) {
+	int nchild, i;
+	
+	if(n != NULL) {
+	
+		//spacers for creating the tree visual
+		for(i=0; i<lvl; i++)
+			printf(" ");
+		nb_of_children(n)==0 ? printf("| ") : printf("+ ");
+		 
+		/*
+		//print the content of this node
+		switch(n->type) {
+			case int_node:
+			case float_node: 	printf("%s",n->lexeme); break;
+
+			case plus_node: 	printf("Soma"); break;
+			case minus_node: 	printf("Subtracao"); break;
+			case mult_node: 	printf("Multiplicacao"); break;
+			case div_node: 		printf("Divisao"); break;
+
+			default: 			printf("Tipo %i",n->type);
+		}
+		*/
+		printf("%s", n->lexeme);
+		printf("\n");
+			
+		for(nchild = 0; nchild<nb_of_children(n); nchild++)
+			printTree_rec( child(n, nchild), lvl+2 );
+	}
+}
+
+void printTree(Node* n) {
+	printTree_rec(n,0);
+}
 

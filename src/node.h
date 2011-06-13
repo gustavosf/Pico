@@ -49,7 +49,7 @@ typedef int Node_type;
 #define true_node      335
 #define false_node     336
 
-// adicionado end_node
+// adicionado
 #define end_node	   337
 #define else_node	   338
 
@@ -140,6 +140,10 @@ int deep_free_node(Node* n) ;
  *  The height of a leaf is 1. 
  */
 int height(Node *n) ;
+
+/** prints in the screen tree rooted by 'n'.
+ */
+void printTree(Node* n);
 
 
 #endif
