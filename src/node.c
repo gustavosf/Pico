@@ -46,7 +46,7 @@ Node* create_node(int nl, Node_type t, char* lex,
 
 Node* create_leaf(int nl, Node_type t, char* lex, void* att) {
     /*verifica o tipo*/
-    if((t < 299) || (t > 336))
+    if((t < 299) || (t > 362))
         notify_error(OLARG);
     /*aloca espaço para o novo nó*/
     Node *novo = malloc(sizeof(Node));
@@ -54,6 +54,8 @@ Node* create_leaf(int nl, Node_type t, char* lex, void* att) {
     novo->num_line = nl;
     novo->id = __nodes_ids__;
     __nodes_ids__++;
+
+	printf("Leaf >> %s (%d)\n", lex, t);
         /*copia o string*/
     if(lex == NULL) 
         novo->lexeme = NULL;
@@ -175,7 +177,7 @@ void printTree_rec(Node* n, int lvl) {
 			default: 			printf("Tipo %i",n->type);
 		}
 		*/
-		printf("%s", n->lexeme);
+		printf("%s (%d)", n->lexeme, n->type);
 		printf("\n");
 			
 		for(nchild = 0; nchild<nb_of_children(n); nchild++)

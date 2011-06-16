@@ -50,8 +50,32 @@ typedef int Node_type;
 #define false_node     336
 
 // adicionado
-#define end_node	   337
-#define else_node	   338
+#define end_node	     337
+#define else_node	     338
+#define semicolon_node   339
+#define comma_node       340 
+#define double_node      341
+#define real_node        342
+#define opencol_node     343
+#define closecol_node    344
+#define tipolista_node   345
+#define intlit_node      346
+#define acoes_node       347
+#define attrib_node      348
+#define comando_node     349
+#define lsitaexpr_node   350
+#define expr_node        351
+#define openpar_node     352
+#define closepar_node    353
+#define floatlit_node    354
+#define then_node        355
+#define enunciado_node   356
+#define openbra_node     357
+#define closebra_node    358
+#define fimcontrole_node 359
+#define expbool_node     360
+#define colon_node       361
+#define listaexpr_node   362
 
 /** Estrutura de dados parcial para o no da arvore.
  *  Trata-se de uma arvore generalizada: qualquer no pode ter de 0 ateh

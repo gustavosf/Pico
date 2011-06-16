@@ -76,22 +76,18 @@ case   { return(CASE); }
 true   { return(TRUE); }
 false  { return(FALSE); }
 
- /* reconhecimento de caracteres 'brancos'
-  * - carriage return, line feed e tabs
-  */
+ /* reconhecimento de caracteres 'brancos' */
 [ \r\n\t]+ { printf("SPACE\n"); }
 
  /* lexemas complexos */
-({minuscula}|_)({letra}|{digito}|_|#)*    { printf("%s\n", yytext);    return(IDF); }
-{maiuscula}({maiuscula}|{digito}|_)*      { printf("%s\n", yytext);    return(CONST); }
+({minuscula}|_)({letra}|{digito}|_|#)*    { return(IDF); }
+{maiuscula}({maiuscula}|{digito}|_)*      { return(CONST); }
 {digito}+                                 { 
-	VAL_INT = atoi(yytext);
 	yylval.cadeia = (char*) malloc(strlen(yytext)+1);
     strcpy(yylval.cadeia, yytext);
     return(INT_LIT); 
 }
 {digito}+\.{digito}+([eE][+-]?{digito}+)? { 
-	VAL_DOUBLE = atof(yytext); 
 	yylval.cadeia = (char*) malloc(strlen(yytext)+1);
     strcpy(yylval.cadeia, yytext);
 	return(F_LIT); 
@@ -110,9 +106,7 @@ false  { return(FALSE); }
   \n        yylineno++; 
 }
 
- /* Tratamento dos erros lexicais: a regra seguinte pega tudo o que nao
-  * fechou com uma Regexp anterior.
-  */
+ /* Tratamento dos erros lexicais */
 . { printf("Erro lexical - caractere nao reconhecido: %c.\n", yytext[0]); exit(-1); }
 
 %%
