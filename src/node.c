@@ -55,8 +55,7 @@ Node* create_leaf(int nl, Node_type t, char* lex, void* att) {
     novo->id = __nodes_ids__;
     __nodes_ids__++;
 
-	printf("Leaf >> %s (%d)\n", lex, t);
-        /*copia o string*/
+    /*copia o string*/
     if(lex == NULL) 
         novo->lexeme = NULL;
     else
@@ -163,22 +162,7 @@ void printTree_rec(Node* n, int lvl) {
 			printf(" ");
 		nb_of_children(n)==0 ? printf("| ") : printf("+ ");
 		 
-		/*
-		//print the content of this node
-		switch(n->type) {
-			case int_node:
-			case float_node: 	printf("%s",n->lexeme); break;
-
-			case plus_node: 	printf("Soma"); break;
-			case minus_node: 	printf("Subtracao"); break;
-			case mult_node: 	printf("Multiplicacao"); break;
-			case div_node: 		printf("Divisao"); break;
-
-			default: 			printf("Tipo %i",n->type);
-		}
-		*/
-		printf("%s (%d)", n->lexeme, n->type);
-		printf("\n");
+		printf("%s (%d)\n", n->lexeme, n->type);
 			
 		for(nchild = 0; nchild<nb_of_children(n); nchild++)
 			printTree_rec( child(n, nchild), lvl+2 );
