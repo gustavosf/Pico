@@ -80,8 +80,16 @@ false  { return(FALSE); }
 [ \r\n\t]+ { printf("SPACE\n"); }
 
  /* lexemas complexos */
-({minuscula}|_)({letra}|{digito}|_|#)*    { return(IDF); }
-{maiuscula}({maiuscula}|{digito}|_)*      { return(CONST); }
+({minuscula}|_)({letra}|{digito}|_|#)*    { 
+	yylval.cadeia = (char*) malloc(strlen(yytext) + 1);
+	strcpy(yylval.cadeia, yytext);
+	return(IDF);
+}
+{maiuscula}({maiuscula}|{digito}|_)*      { 
+	yylval.cadeia = (char*) malloc(strlen(yytext) + 1);
+	strcpy(yylval.cadeia, yytext);
+	return(CONST); 
+}
 {digito}+                                 { 
 	yylval.cadeia = (char*) malloc(strlen(yytext)+1);
     strcpy(yylval.cadeia, yytext);
