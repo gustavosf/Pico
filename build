@@ -1,0 +1,16 @@
+#!/bin/bash
+clear
+
+echo "Qual a etapa do trabalho?"
+read etapa
+
+pasta="Pico-Cristiano-Gustavo-etapa${etapa}"
+
+rm -rf Pico-*
+mkdir $pasta
+make --directory=./src/ clean
+
+cp -r src $pasta
+cp -r Testes $pasta
+tar cvzf "${pasta}.tgz" $pasta --exclude=*/.*
+rm -fr $pasta
