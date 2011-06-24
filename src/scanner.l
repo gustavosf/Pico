@@ -77,7 +77,7 @@ true   { return(TRUE); }
 false  { return(FALSE); }
 
  /* reconhecimento de caracteres 'brancos' */
-[ \r\n\t]+ { printf("SPACE\n"); }
+[ \r\n\t]+ { /*printf("SPACE\n");*/ }
 
  /* lexemas complexos */
 ({minuscula}|_)({letra}|{digito}|_|#)*    { 
