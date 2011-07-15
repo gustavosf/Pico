@@ -46,7 +46,7 @@ Node* create_node(int nl, Node_type t, char* lex,
 
 Node* create_leaf(int nl, Node_type t, char* lex, void* att) {
     /*verifica o tipo*/
-    if((t < 299) || (t > 362))
+    if((t < 299) || (t > 363))
         notify_error(OLARG);
     /*aloca espaço para o novo nó*/
     Node *novo = malloc(sizeof(Node));

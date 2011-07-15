@@ -5,6 +5,7 @@
 #define _SYMBOL_TABLE_H_
 
 #include <stdio.h>
+#include <stdlib.h>
 
 #define PRIME 211 // 9901
 

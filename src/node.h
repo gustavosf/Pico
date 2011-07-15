@@ -76,6 +76,7 @@ typedef int Node_type;
 #define expbool_node     360
 #define colon_node       361
 #define listaexpr_node   362
+#define listadupla_node  363
 
 /** Estrutura de dados parcial para o no da arvore.
  *  Trata-se de uma arvore generalizada: qualquer no pode ter de 0 ateh
